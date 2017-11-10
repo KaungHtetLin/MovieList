@@ -1,4 +1,4 @@
-package net.kaunghtetlin.poc;
+package net.kaunghtetlin.poc.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import net.kaunghtetlin.poc.R;
+import net.kaunghtetlin.poc.fragments.MovieFragment;
+import net.kaunghtetlin.poc.fragments.MoviePagerFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -26,6 +30,9 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        navigateToTabLayout();
+
     }
 
     @Override
@@ -49,4 +56,18 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void navigateToMovie(){
+        MovieFragment movieFragment= MovieFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fl_container,movieFragment)
+                .commit();
+    }
+
+    private void navigateToTabLayout() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fl_container, MoviePagerFragment.newInstance())
+                .commit();
+    }
+
 }
