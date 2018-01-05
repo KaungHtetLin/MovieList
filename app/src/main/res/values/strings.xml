@@ -6,4 +6,6 @@
     <string name="txt_popularity">Current Popularity</string>
     <string name="txt_movie_overview">Movie Overview</string>
     <string name="txt_rating">7.4</string>
+    <string name="no_data_to_display">No Data To Display</string>
+    <string name="refresh">Refresh</string>
 </resources>
