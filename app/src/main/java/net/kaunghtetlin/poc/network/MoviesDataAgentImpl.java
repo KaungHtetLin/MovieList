@@ -52,19 +52,20 @@ public class MoviesDataAgentImpl implements MoviesDataAgent {
     @Override
     public void loadMovies(String accessToken, int page, final Context context) {
         Call<GetMoviesResponse> loadMovieCall = theAPI.loadPopularMovies(accessToken, page);
-        loadMovieCall.enqueue(new MovieCallBack<GetMoviesResponse>() {
-                                  @Override
-                                  public void onResponse(Call<GetMoviesResponse> call, Response<GetMoviesResponse> response) {
-                                      super.onResponse(call, response);
-                                      GetMoviesResponse getMoviesResponse = response.body();
-                                      if (getMoviesResponse != null
-                                              && getMoviesResponse.getPopularMovies().size() > 0) {
-                                          RestApiEvents.MovieDataLoadedEvent movieDataLoadedEvent = new RestApiEvents.MovieDataLoadedEvent
-                                                  (getMoviesResponse.getPage(), getMoviesResponse.getPopularMovies(), context);
-                                          EventBus.getDefault().post(movieDataLoadedEvent);
-                                      }
-                                  }
-                              }
+        loadMovieCall.enqueue(
+                new MovieCallBack<GetMoviesResponse>() {
+                    @Override
+                    public void onResponse(Call<GetMoviesResponse> call, Response<GetMoviesResponse> response) {
+                        super.onResponse(call, response);
+                        GetMoviesResponse getMoviesResponse = response.body();
+                        if (getMoviesResponse != null
+                                && getMoviesResponse.getPopularMovies().size() > 0) {
+                            RestApiEvents.MovieDataLoadedEvent movieDataLoadedEvent = new RestApiEvents.MovieDataLoadedEvent
+                                    (getMoviesResponse.getPage(), getMoviesResponse.getPopularMovies(), context);
+                            EventBus.getDefault().post(movieDataLoadedEvent);
+                        }
+                    }
+                }
         );
         /*loadMovieCall.enqueue(new Callback<GetMoviesResponse>() {
             @Override

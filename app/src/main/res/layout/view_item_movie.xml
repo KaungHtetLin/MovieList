@@ -18,11 +18,16 @@
         android:weightSum="30">
 
         <FrameLayout
-            android:id="@+id/iv_hero_image"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_weight="13.5"
-            android:background="@drawable/it_logo">
+            android:layout_weight="13.5">
+
+            <ImageView
+                android:id="@+id/iv_hero_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/it_logo" />
 
             <ImageView
                 android:id="@+id/iv_full_screen"
@@ -41,7 +46,7 @@
                 android:background="@drawable/heart">
 
                 <TextView
-                    android:id="@+id/tv_rating"
+                    android:id="@+id/tv_vote_average"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
