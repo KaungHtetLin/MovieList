@@ -46,6 +46,7 @@ public class MoviePagerFragment extends Fragment {
 
         pagerMovie.setAdapter(mMoviePagerAdapter);
         pagerMovie.setOffscreenPageLimit(mMoviePagerAdapter.getCount());
+//        pagerMovie.setOff
 
         tlMovie.setupWithViewPager(pagerMovie);
 

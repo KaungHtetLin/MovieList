@@ -11,6 +11,7 @@ import net.kaunghtetlin.poc.events.RestApiEvents;
 import net.kaunghtetlin.poc.network.MoviesDataAgentImpl;
 import net.kaunghtetlin.poc.persistance.MovieContract;
 import net.kaunghtetlin.poc.utils.AppConstants;
+import net.kaunghtetlin.poc.utils.ConfigUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +30,7 @@ public class MovieModel {
     private static MovieModel objInstance;
 
     private List<MovieVO> mMoive;
-    private int mMoviePageIndex = 1;
+//    private int mMoviePageIndex = 1;
 
     private MovieModel() {
         EventBus.getDefault().register(this);
@@ -45,7 +46,7 @@ public class MovieModel {
 
     public void startLoadingMovies(Context context) {
         MoviesDataAgentImpl.getObjInstance().loadMovies(AppConstants.ACCESS_TOKEN,
-                mMoviePageIndex, context);
+                ConfigUtils.getObjInstance().loadPageIndex(), context);
     }
 
     public List<MovieVO> getMovies() {
@@ -57,12 +58,13 @@ public class MovieModel {
 
     public void loadMoreMovies(Context context) {
         MoviesDataAgentImpl.getObjInstance().loadMovies(AppConstants.ACCESS_TOKEN,
-                mMoviePageIndex, context);
+                ConfigUtils.getObjInstance().loadPageIndex(), context);
     }
 
     public void forceRefresMovie(Context context) {
         mMoive = new ArrayList<>();
-        mMoviePageIndex = 1;
+//        mMoviePageIndex = 1;
+        ConfigUtils.getObjInstance().savePageIndex(1);
         startLoadingMovies(context);
     }
 
@@ -70,7 +72,8 @@ public class MovieModel {
     public void onMovieDataLoaded(RestApiEvents.MovieDataLoadedEvent event) {
 
         mMoive.addAll(event.getLoadedMovies());
-        mMoviePageIndex = event.getLoadedPageIndex() + 1;
+//        mMoviePageIndex = event.getLoadedPageIndex() + 1;
+        ConfigUtils.getObjInstance().savePageIndex(event.getLoadedPageIndex()+1);
 
         // inserting data into mMovieSet
         ContentValues[] movieCVs = new ContentValues[event.getLoadedMovies().size()];

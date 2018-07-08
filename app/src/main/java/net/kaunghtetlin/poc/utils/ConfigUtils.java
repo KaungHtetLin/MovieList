@@ -7,24 +7,24 @@ import android.content.SharedPreferences;
  * Created by Kaung Htet Lin on 1/5/2018.
  */
 
-public class ConfigUtil {
+public class ConfigUtils {
 
 
     private static final String KEY_PAGE_INDEX = "KEY_PAGE_INDEX";
 
     private SharedPreferences mSharedPreferences;
 
-    private static ConfigUtil sObjInstance;
+    private static ConfigUtils sObjInstance;
 
-    private ConfigUtil(Context context) {
+    private ConfigUtils(Context context) {
         mSharedPreferences = context.getSharedPreferences("ConfigUtils", Context.MODE_PRIVATE);
     }
 
     public static void initConfigUtils(Context context) {
-        sObjInstance = new ConfigUtil(context);
+        sObjInstance = new ConfigUtils(context);
     }
 
-    public static ConfigUtil getObjInstance() {
+    public static ConfigUtils getObjInstance() {
         return sObjInstance;
     }
 

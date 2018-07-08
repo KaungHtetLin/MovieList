@@ -58,7 +58,7 @@ public class MoviesDataAgentImpl implements MoviesDataAgent {
                     public void onResponse(Call<GetMoviesResponse> call, Response<GetMoviesResponse> response) {
                         super.onResponse(call, response);
                         GetMoviesResponse getMoviesResponse = response.body();
-                        if (getMoviesResponse != null
+                        if (getMoviesResponse != null && getMoviesResponse.getPopularMovies()!=null
                                 && getMoviesResponse.getPopularMovies().size() > 0) {
                             RestApiEvents.MovieDataLoadedEvent movieDataLoadedEvent = new RestApiEvents.MovieDataLoadedEvent
                                     (getMoviesResponse.getPage(), getMoviesResponse.getPopularMovies(), context);
@@ -67,29 +67,6 @@ public class MoviesDataAgentImpl implements MoviesDataAgent {
                     }
                 }
         );
-        /*loadMovieCall.enqueue(new Callback<GetMoviesResponse>() {
-            @Override
-            public void onResponse(Call<GetMoviesResponse> call, Response<GetMoviesResponse> response) {
-
-                GetMoviesResponse getPopularMoviesResponse = response.body();
-                if (getPopularMoviesResponse != null && getPopularMoviesResponse.getPopularMovies().size() > 0) {
-                    RestApiEvents.MovieDataLoadedEvent movieDataLoadedEvent = new RestApiEvents.MovieDataLoadedEvent
-                            (getPopularMoviesResponse.getPage(), getPopularMoviesResponse.getPopularMovies(), context);
-                    EventBus.getDefault().post(movieDataLoadedEvent);
-                } else {
-                    RestApiEvents.ErrorInvokingAPIEvent errorEvent
-                            = new RestApiEvents.ErrorInvokingAPIEvent("No data could be loaded for now. Pls try again later");
-                    EventBus.getDefault().post(errorEvent);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetMoviesResponse> call, Throwable t) {
-                RestApiEvents.ErrorInvokingAPIEvent errorEvent
-                        = new RestApiEvents.ErrorInvokingAPIEvent(t.getMessage());
-                EventBus.getDefault().post(errorEvent);
-            }
-        });*/
     }
 
 }

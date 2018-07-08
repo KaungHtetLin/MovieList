@@ -1,6 +1,7 @@
 package net.kaunghtetlin.poc.network;
 
 import net.kaunghtetlin.poc.network.responses.GetMoviesResponse;
+import net.kaunghtetlin.poc.utils.AppConstants;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -18,5 +19,4 @@ public interface MoviesAPI {
     Call<GetMoviesResponse> loadPopularMovies(
             @Field("access_token") String accessToken,
             @Field("page") int pageIndex);
-
 }
