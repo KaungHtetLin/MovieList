@@ -27,7 +27,7 @@ public class MoviePresenter extends BasePresenter<MovieView> {
         if (!movieList.isEmpty()) {
             mView.displayMovieList(movieList);
         } else {
-            mView.showLoading();
+//            mView.showLoading();
         }
 
     }

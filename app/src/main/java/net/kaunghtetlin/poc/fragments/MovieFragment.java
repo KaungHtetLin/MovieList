@@ -66,6 +66,9 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+        mPresenter = new MoviePresenter();
+        mPresenter.onStart();
+
         mPresenter.onCreate(this);
 
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
